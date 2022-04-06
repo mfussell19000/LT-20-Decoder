@@ -1,0 +1,51 @@
+if (payload_hex.StartsWith("8002")
+
+{
+
+               string longitude = payload_hex.Substring(8, 2) + payload_hex.Substring(6, 2) + payload_hex.Substring(4, 2);
+
+               double dlongitude = Convert.ToInt32(longitude, 16);
+
+               if (dlongitude >= 0x800000)
+
+               {
+
+                              dlongitude = dlongitude - 0x1000000;
+
+               }
+
+               dlongitude = dlongitude * 215 * 0.0000001;
+
+ 
+
+               string latitude = payload_hex.Substring(14, 2) + payload_hex.Substring(12, 2) + payload_hex.Substring(10, 2);
+
+               double dlatitude = Convert.ToInt32(latitude, 16);
+
+               if (dlatitude >= 0x800000)
+
+               {
+
+                              dlatitude = dlatitude - 0x1000000;
+
+               }
+
+               dlatitude = dlatitude * 108 * 0.0000001;
+
+ 
+
+               int GPS = Convert.ToUInt16(payload_hex.Substring(16, 2), 16);
+
+               GPS = GPS / 32;
+
+ 
+
+               int ReportType = Convert.ToUInt16(payload_hex.Substring(16, 2), 16);
+
+               ReportType = ReportType % 32;
+
+ 
+
+               int BatteryCapacity = Convert.ToUInt16(payload_hex.Substring(18, 2), 16);
+
+}
